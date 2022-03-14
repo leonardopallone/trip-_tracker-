@@ -10,9 +10,9 @@ Rails.application.routes.draw do
     resources :users do
       resources :trips 
     end
-      # resources :trips, except: [:index, :update,:create,:destroy] do
+      resources :trips, except: [:index, :update,:create,:destroy] do
 
-      # end
+      end
 
   end
 
