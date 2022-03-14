@@ -12,7 +12,6 @@ class Api::TripsController < ApplicationController
   end
 
   def create
-    
     @trip = @user.trips.new(trip_params)
     if @trip.save
       render json: @trip
@@ -37,7 +36,7 @@ class Api::TripsController < ApplicationController
   private 
     def set_user
       @user = User.find(params[:user_id])
-      # @user = @user.trips.find(params[:id])
+      
     end
 
     def set_trip
