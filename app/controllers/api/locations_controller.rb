@@ -2,11 +2,11 @@ class Api::LocationsController < ApplicationController
 
  
   # before_action :set_user
-  # before_action :set_trip
+  before_action :set_trip
   before_action :set_location, only: [:show, :update, :destroy]
 
   def index
-    render json: Location.all
+    render json: @trip.locations
   end
 
   def show
@@ -14,7 +14,7 @@ class Api::LocationsController < ApplicationController
   end
 
   def create
-    @location = Location.new(location_params)
+    @location = @trip.locations.new(location_params)
     if @location.save
       render json: @location
     else
@@ -36,12 +36,17 @@ class Api::LocationsController < ApplicationController
   end
 
   private 
+
+  def set_trip
+    @trip = Trip.find(params[:trip_id])
+  end
+
     def set_location
-      @location = Location.find(params[:id])
+      @location = trip.locations.find(params[:id])
       
     end
 
-  
+
     def location_params
       params.require(:location).permit(:name)
     end
